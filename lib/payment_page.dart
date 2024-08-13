@@ -2,10 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:payment_app/constants.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({Key? key}) : super(key: key);
@@ -104,7 +105,8 @@ class _PaymentPageState extends State<PaymentPage> {
       final response = await http.post(
         Uri.parse('https://api.stripe.com/v1/payment_intents'),
         headers: {
-          'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET_KEY']}',
+          'Authorization': Constants.authorization,
+
           // Your secret key here
           'Content-Type': 'application/x-www-form-urlencoded',
         },

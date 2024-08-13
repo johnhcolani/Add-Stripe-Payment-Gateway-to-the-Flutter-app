@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:payment_app/constants.dart';
 import 'package:payment_app/payment_page.dart';
 
-void main() {
+void main()async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Load environment variables from the .env file
+  await dotenv.load(fileName: ".env");
   /// set the publishable key form my Strip
-  Stripe.publishableKey = dotenv.env['STRIPE_PUBLISHABLE_KEY']!;
+
+  Stripe.publishableKey = Constants.stripePublishableKey;
   Stripe.merchantIdentifier = 'com.johncolani.paymentApp'; // Add your Merchant ID here
 
   runApp(const MyApp());
